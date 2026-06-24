@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Intelligence Portal</title>
+    <title>Crypto Education Portal</title>
     <style>
         :root {
-            --bg-dark: #0a0a0c;
-            --sidebar-bg: #111114;
-            --accent-blue: #007bff;
-            --text-main: #e0e0e0;
-            --text-dim: #a0a0a0;
-            --border-color: #2a2a2e;
-            --card-bg: #16161a;
+            --bg-light: #ffffff;
+            --sidebar-bg: #f8f9fa;
+            --accent-blue: #2563eb;
+            --text-main: #1f2937;
+            --text-dim: #4b5563;
+            --border-color: #e5e7eb;
+            --card-bg: #ffffff;
+            --hover-blue: #dbeafe;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-light);
             color: var(--text-main);
             margin: 0;
             display: flex;
@@ -25,14 +26,14 @@
             overflow: hidden;
         }
 
-        /* Sidebar Navigation */
+        /* Sidebar */
         nav {
-            width: 280px;
+            width: 300px;
             background-color: var(--sidebar-bg);
             border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
-            padding: 20px;
+            padding: 25px;
         }
 
         .logo-container {
@@ -41,282 +42,285 @@
         }
 
         .logo-container img {
-            width: 180px;
-            filter: drop-shadow(0 0 5px rgba(0, 123, 255, 0.3));
+            width: 160px;
         }
 
         .nav-btn {
             background: transparent;
-            border: 1px solid transparent;
+            border: none;
             color: var(--text-dim);
-            padding: 12px 15px;
+            padding: 14px 18px;
             text-align: left;
-            font-size: 14px;
+            font-size: 15px;
+            font-weight: 500;
             cursor: pointer;
-            border-radius: 6px;
-            margin-bottom: 8px;
+            border-radius: 8px;
+            margin-bottom: 5px;
             transition: all 0.2s ease;
         }
 
         .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
+            background: var(--hover-blue);
+            color: var(--accent-blue);
         }
 
         .nav-btn.active {
             background: var(--accent-blue);
             color: #fff;
-            border-color: var(--accent-blue);
         }
 
-        /* Main Content Area */
+        /* Main Content */
         main {
             flex-grow: 1;
-            padding: 40px;
+            padding: 50px 80px;
             overflow-y: auto;
-            background: radial-gradient(circle at top right, #111114, #0a0a0c);
         }
 
         .content-section {
             display: none;
-            max-width: 900px;
-            animation: fadeIn 0.4s ease;
+            max-width: 1000px;
+            animation: slideIn 0.3s ease-out;
         }
 
         .content-section.active {
             display: block;
         }
 
-        h1 { font-size: 2.5rem; color: #fff; margin-bottom: 10px; }
-        h2 { color: var(--accent-blue); border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-top: 30px; }
-        p { line-height: 1.6; color: var(--text-dim); }
+        h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -0.02em; }
+        h2 { font-size: 1.8rem; color: var(--text-main); margin-top: 40px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; }
+        p { font-size: 1.1rem; line-height: 1.7; color: var(--text-dim); }
+
+        .takeaways-box {
+            background: #f0f7ff;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 5px solid var(--accent-blue);
+        }
+
+        .takeaways-box h3 { margin-top: 0; color: var(--accent-blue); }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
         }
 
         .card {
             background: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
+            padding: 25px;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
-            transition: transform 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-blue);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
-        .card h3 { margin-top: 0; color: #fff; }
+        .card h3 { color: var(--accent-blue); margin-top: 0; }
 
-        .security-alert {
-            background: rgba(255, 68, 68, 0.1);
-            border-left: 4px solid #ff4444;
-            padding: 15px;
-            margin: 20px 0;
+        /* Story Cards */
+        .story-card {
+            background: #fff9eb;
+            border: 1px dashed #f59e0b;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
         }
 
-        .vocab-item {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .vocab-term {
+        .story-tag {
+            background: #f59e0b;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
             font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .stat-highlight {
+            font-size: 2.5rem;
+            font-weight: 800;
             color: var(--accent-blue);
             display: block;
-            font-size: 1.1rem;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
+
+        ul li { margin-bottom: 10px; line-height: 1.6; color: var(--text-dim); }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="logo-container">
-            <img src="https://bitelity.net/Media/Image/logo.svg" alt="Logo">
+            <img src="https://bitelity.net/Media/Image/logo.svg" alt="Bitelity Logo">
         </div>
-        <button class="nav-btn active" onclick="showSection('intro')">1. Introduction</button>
-        <button class="nav-btn" onclick="showSection('blockchain')">2. Technology</button>
-        <button class="nav-btn" onclick="showSection('coins')">3. Top Currencies</button>
-        <button class="nav-btn" onclick="showSection('storage')">4. Safe Storage</button>
-        <button class="nav-btn" onclick="showSection('investing')">5. Investing</button>
+        <button class="nav-btn active" onclick="showSection('intro')">1. What is Crypto?</button>
+        <button class="nav-btn" onclick="showSection('investing')">2. Investing Made Easy</button>
+        <button class="nav-btn" onclick="showSection('blockchain')">3. Technology & Trust</button>
+        <button class="nav-btn" onclick="showSection('folklore')">4. Crypto Folklore</button>
+        <button class="nav-btn" onclick="showSection('storage')">5. Storage & Safety</button>
         <button class="nav-btn" onclick="showSection('vocab')">6. Vocabulary</button>
     </nav>
 
     <main>
-        <!-- Section 1: Introduction -->
+        <!-- Section 1: Intro -->
         <section id="intro" class="content-section active">
-            <h1>What Is Cryptocurrency?</h1>
-            <p>Cryptocurrency is a decentralized digital currency designed to work as a medium of exchange through a computer network that is not reliant on any central authority, such as a government or bank.</p>
+            <h1>What Is Crypto?</h1>
+            <p>Cryptocurrency is a form of decentralized money that only exists in digital form. Unlike dollars, it isn’t issued or controlled by a government or central bank. Instead, it runs on a <strong>blockchain</strong>: a public ledger spread across a network of computers.</p>
             
             <div class="grid">
                 <div class="card">
-                    <h3>How Bitcoin Works</h3>
-                    <p>Bitcoin uses peer-to-peer technology to operate with no central authority. Transaction management and money issuance are carried out collectively by the network.</p>
+                    <h3>The Digital Spreadsheet</h3>
+                    <p>“Blockchain is similar to a spreadsheet everyone can see but no one can change,” says Ron Levy. It ensures ownership and supply are verifiable without a bank.</p>
                 </div>
                 <div class="card">
-                    <h3>Blockchain Value</h3>
-                    <p>Blockchain matters because it provides a transparent, immutable, and tamper-proof record of all transactions ever made.</p>
-                </div>
-                <div class="card">
-                    <h3>Digital vs Traditional</h3>
-                    <p>Unlike Fiat (USD/EUR), Crypto has no physical form and relies on cryptographic proofs rather than trust in financial institutions.</p>
+                    <h3>Mining & Validation</h3>
+                    <p>Computers solve complex puzzles to validate transactions. The first to solve it earns new coins, supporting the network's security.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Section 2: Blockchain Technology -->
+        <!-- Section 2: Investing -->
+        <section id="investing" class="content-section">
+            <h1>Investing Made Easy</h1>
+            <div class="takeaways-box">
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li><strong>Market Adoption:</strong> U.S. ownership grew from 2% (2018) to 17% (2025).</li>
+                    <li><strong>24/7 Trading:</strong> Unlike stocks, crypto markets never close.</li>
+                    <li><strong>Tax Status:</strong> The IRS treats crypto as property; selling is a taxable event.</li>
+                    <li><strong>Volatility:</strong> Rapid price swings are common due to 24/7 supply/demand.</li>
+                </ul>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <span class="stat-highlight">17%</span>
+                    <p>Of U.S. investors now own cryptocurrency as of 2025.</p>
+                </div>
+                <div class="card">
+                    <h3>Why People Invest</h3>
+                    <p>Confidence in blockchain technology, speculation on price increases, or as a hedge against inflation in traditional markets.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Blockchain -->
         <section id="blockchain" class="content-section">
-            <h1>Understanding Blockchain</h1>
-            <h2>Core Fundamentals</h2>
-            <p>Blockchain is a distributed ledger technology (DLT). Each "block" contains a list of transactions, and blocks are linked using complex cryptography.</p>
+            <h1>Technology & Trust</h1>
+            <p>“Blockchain changes how we think about trust in finance,” says Charley Brady. It enables genuine peer-to-peer value transfer globally without traditional banks.</p>
             
             <div class="grid">
                 <div class="card">
-                    <h3>Consensus Mechanisms</h3>
-                    <p>Methods like Proof of Work (PoW) and Proof of Stake (PoS) ensure all nodes on the network agree on the state of the ledger.</p>
+                    <h3>Decentralization</h3>
+                    <p>No single point of failure. The network is maintained by thousands of independent participants.</p>
                 </div>
                 <div class="card">
                     <h3>Smart Contracts</h3>
-                    <p>Self-executing contracts with the terms of the agreement directly written into lines of code. No middleman required.</p>
-                </div>
-                <div class="card">
-                    <h3>Digital Ownership</h3>
-                    <p>Blockchain allows for true ownership of digital assets through private keys that only the owner controls.</p>
+                    <p>Self-executing agreements that trigger automatically when conditions are met, removing the need for lawyers or intermediaries.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Section 3: Important Cryptocurrencies -->
-        <section id="coins" class="content-section">
-            <h1>The Most Important Cryptocurrencies</h1>
-            <div class="grid">
-                <div class="card">
-                    <h3>Bitcoin (BTC)</h3>
-                    <p><strong>First cryptocurrency:</strong> Created in 2009 by Satoshi Nakamoto.</p>
-                    <p><strong>Supply:</strong> Max 21 Million.</p>
-                    <p>Known as "Digital Gold".</p>
-                </div>
-                <div class="card">
-                    <h3>Ethereum (ETH)</h3>
-                    <p>The pioneer of Smart Contracts. It powers the majority of decentralized applications (dApps) and DeFi protocols.</p>
-                </div>
-                <div class="card">
-                    <h3>Solana (SOL)</h3>
-                    <p>High-performance blockchain with extremely fast transaction speeds and low fees.</p>
-                </div>
-                <div class="card">
-                    <h3>XRP</h3>
-                    <p>Designed for enterprise use, focusing on high-speed international payment infrastructure for banks.</p>
-                </div>
+        <!-- Section 4: Folklore -->
+        <section id="folklore" class="content-section">
+            <h1>Crypto Legends & Stories</h1>
+            <p>The history of cryptocurrency is filled with fascinating, and sometimes bizarre, turning points.</p>
+
+            <div class="story-card">
+                <span class="story-tag">The Bitcoin Pizza</span>
+                <h3>The $700 Million Dinner</h3>
+                <p>In 2010, Laszlo Hanyecz paid 10,000 BTC for two Papa John's pizzas. At the time, it was worth $41. At Bitcoin's peak, those pizzas would be worth over <strong>$700,000,000</strong>. This was the first real-world transaction using cryptocurrency.</p>
+            </div>
+
+            <div class="story-card">
+                <span class="story-tag">The Ethereum Vision</span>
+                <h3>Vitalik Buterin's Motivation</h3>
+                <p>The creator of Ethereum, Vitalik Buterin, reportedly wanted to create a decentralized system after a centralized gaming company (Blizzard) nerfed his favorite character's "Siphon Life" spell in World of Warcraft. He realized how much power centralized entities have and decided to build a world where users hold the power.</p>
+            </div>
+
+            <div class="story-card">
+                <span class="story-tag">Satoshi Nakamoto</span>
+                <h3>The Ghost Creator</h3>
+                <p>The creator of Bitcoin remains anonymous to this day. Satoshi disappeared in 2011, leaving behind a fortune of 1.1 million BTC that has never been moved. This anonymity ensures Bitcoin has no "head" to be attacked by governments.</p>
             </div>
         </section>
 
-        <!-- Section 4: Safe Storage -->
+        <!-- Section 5: Storage -->
         <section id="storage" class="content-section">
-            <h1>How to Store Crypto Safely</h1>
-            <p>Your security depends entirely on how you manage your keys. Understand the hierarchy of wallet security:</p>
+            <h1>Storage & Safety</h1>
+            <p>You need a wallet and an exchange account to start, but you can begin with a very small amount of money.</p>
             
             <div class="grid">
                 <div class="card">
-                    <h3>Cold Storage / Hardware</h3>
-                    <p>The safest method. Keys are kept offline on physical devices like Ledger or Trezor, immune to online hacks.</p>
-                </div>
-                <div class="card">
-                    <h3>Mobile / Software Wallets</h3>
-                    <p>Apps on your phone. Convenient for daily use but vulnerable if the device is compromised.</p>
+                    <h3>Cold Storage</h3>
+                    <p>Physical devices (USB-like) that keep your keys offline. The gold standard for security.</p>
                 </div>
                 <div class="card">
                     <h3>Exchange Wallets</h3>
-                    <p>Convenient for trading but you do not own the keys. "Not your keys, not your coins."</p>
+                    <p>Easiest to use, but the exchange controls your funds. Ideal for small amounts or active trading.</p>
                 </div>
             </div>
 
-            <div class="security-alert">
-                <h3>Critical Security Rules</h3>
+            <div class="takeaways-box" style="background: #fff5f5; border-color: #fc8181;">
+                <h3 style="color: #c53030;">Security Rules</h3>
                 <ul>
-                    <li>Never share your recovery phrase (Seed Phrase) with anyone.</li>
-                    <li>Enable hardware-based Two-Factor Authentication (2FA).</li>
-                    <li>Always verify wallet addresses character-by-character before sending.</li>
-                    <li>Beware of phishing sites mimicking exchanges or wallet providers.</li>
+                    <li>Never share your 12-24 word recovery phrase.</li>
+                    <li>Always enable 2FA (Two-Factor Authentication).</li>
+                    <li>Verify every address before hitting "Send".</li>
                 </ul>
             </div>
         </section>
 
-        <!-- Section 5: Investing Works -->
-        <section id="investing" class="content-section">
-            <h1>How Investing Works</h1>
+        <!-- Section 6: Vocab -->
+        <section id="vocab" class="content-section">
+            <h1>Essential Vocabulary</h1>
             <div class="grid">
                 <div class="card">
-                    <h3>Market Volatility</h3>
-                    <p>Prices can swing significantly in short periods. High risk, high reward potential.</p>
+                    <h3>HODL</h3>
+                    <p>A misspelling of "hold" that became a mantra for long-term investors who refuse to sell during price drops.</p>
                 </div>
                 <div class="card">
-                    <h3>Risk Management</h3>
-                    <p>Never invest more than you can afford to lose. Use stop-losses and diversify your portfolio.</p>
+                    <h3>Fiat</h3>
+                    <p>Traditional government-issued currency like the US Dollar or Euro.</p>
                 </div>
                 <div class="card">
-                    <h3>Long-term Strategy</h3>
-                    <p>Many investors choose "HODLing" — holding assets for years to ignore short-term price noise.</p>
+                    <h3>Gas Fees</h3>
+                    <p>The transaction fee paid to miners or validators to process your transaction on the network.</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- Section 6: Essential Vocabulary -->
-        <section id="vocab" class="content-section">
-            <h1>Essential Crypto Vocabulary</h1>
-            
-            <div class="vocab-item">
-                <span class="vocab-term">Blockchain</span>
-                A digital ledger that records transactions across many computers.
-            </div>
-            <div class="vocab-item">
-                <span class="vocab-term">Private Key</span>
-                A secret code (like a password) that grants access to your crypto funds.
-            </div>
-            <div class="vocab-item">
-                <span class="vocab-term">DeFi</span>
-                Decentralized Finance: Financial services built on blockchain without banks.
-            </div>
-            <div class="vocab-item">
-                <span class="vocab-term">Stablecoin</span>
-                Cryptocurrencies pegged to stable assets like the US Dollar (e.g., USDT, USDC).
-            </div>
-            <div class="vocab-item">
-                <span class="vocab-term">Smart Contract</span>
-                Code that automatically executes an agreement when conditions are met.
+                <div class="card">
+                    <h3>Stablecoin</h3>
+                    <p>A digital asset pegged 1:1 to a stable asset like the Dollar (e.g., USDC, USDT).</p>
+                </div>
             </div>
         </section>
     </main>
 
     <script>
         function showSection(sectionId) {
-            // Hide all sections
             const sections = document.querySelectorAll('.content-section');
             sections.forEach(s => s.classList.remove('active'));
 
-            // Deactivate all buttons
             const buttons = document.querySelectorAll('.nav-btn');
             buttons.forEach(b => b.classList.remove('active'));
 
-            // Show target section
             document.getElementById(sectionId).classList.add('active');
 
-            // Find clicked button and activate it
             const clickedBtn = Array.from(buttons).find(btn => 
                 btn.getAttribute('onclick').includes(sectionId)
             );
             if (clickedBtn) clickedBtn.classList.add('active');
+            
+            // Scroll to top of main on change
+            document.querySelector('main').scrollTop = 0;
         }
     </script>
 </body>
