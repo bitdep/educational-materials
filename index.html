@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pro-Crypto Intelligence Suite</title>
+    <title>Crypto Intelligence & Portfolio Suite</title>
     <style>
         :root {
             --primary: #0052ff;
-            --secondary: #050f19;
             --success: #00c853;
             --danger: #ff3d00;
             --bg: #ffffff;
@@ -17,302 +16,189 @@
             --border: #e5e7eb;
         }
 
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            margin: 0;
-            display: flex;
-            height: 100vh;
-            color: var(--text-main);
-            background: var(--bg);
-        }
+        body { font-family: 'Inter', sans-serif; margin: 0; display: flex; height: 100vh; color: var(--text-main); background: var(--bg); overflow: hidden; }
 
-        /* Sidebar Navigation */
-        nav {
-            width: 280px;
-            background: var(--sidebar);
-            border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            padding: 40px 20px;
-            flex-shrink: 0;
-        }
-
-        .logo { margin-bottom: 50px; text-align: center; }
+        /* Sidebar */
+        nav { width: 280px; background: var(--sidebar); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 40px 20px; flex-shrink: 0; }
+        .logo { margin-bottom: 40px; text-align: center; }
         .logo img { width: 140px; }
-
-        .nav-group-label { 
-            font-size: 11px; 
-            text-transform: uppercase; 
-            color: var(--text-muted); 
-            margin: 20px 0 10px 10px;
-            letter-spacing: 1px;
-            font-weight: 700;
-        }
-
-        .nav-item {
-            padding: 12px 15px;
-            margin-bottom: 4px;
-            border-radius: 10px;
-            cursor: pointer;
-            color: var(--text-main);
-            font-weight: 500;
-            transition: 0.2s;
-            border: none;
-            background: none;
-            text-align: left;
-            display: flex;
-            align-items: center;
-        }
-
+        .nav-group { font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin: 20px 0 10px 10px; font-weight: 700; letter-spacing: 1px; }
+        .nav-item { padding: 12px 15px; border-radius: 10px; cursor: pointer; font-weight: 500; transition: 0.2s; border: none; background: none; text-align: left; width: 100%; display: flex; align-items: center; color: var(--text-main); }
         .nav-item:hover { background: #e8effd; color: var(--primary); }
         .nav-item.active { background: var(--primary); color: white; }
 
-        /* Main Content Area */
-        main {
-            flex-grow: 1;
-            padding: 60px 10%;
-            overflow-y: auto;
-            scroll-behavior: smooth;
-        }
-
-        .section { display: none; animation: fadeIn 0.5s ease; }
+        /* Main Content */
+        main { flex-grow: 1; padding: 40px 8%; overflow-y: auto; scroll-behavior: smooth; }
+        .section { display: none; animation: fadeIn 0.4s ease; }
         .section.active { display: block; }
-
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        h1 { font-size: 32px; font-weight: 800; margin-bottom: 24px; }
-        h2 { font-size: 22px; margin-top: 40px; margin-bottom: 20px; }
-        p { line-height: 1.6; color: var(--text-muted); font-size: 16px; }
-
-        /* Interactive Elements */
-        .pro-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-        }
-
-        .pattern-box {
-            background: #f9fafb;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 15px;
-            border-left: 4px solid var(--primary);
-        }
-
-        .btn-expand {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-
-        .hidden-info { display: none; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px; }
-
-        /* Vocabulary Searchable Grid */
-        .vocab-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 15px;
-        }
-
-        .vocab-tag {
-            padding: 15px;
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            font-size: 14px;
-        }
-
-        .vocab-tag strong { color: var(--primary); display: block; margin-bottom: 5px; }
-
-        /* Market Psychology Meter */
-        .psych-meter {
-            height: 20px;
-            width: 100%;
-            background: linear-gradient(to right, var(--danger), #ffeb3b, var(--success));
-            border-radius: 10px;
-            margin: 20px 0;
-            position: relative;
-        }
-
-        .cta-banner {
-            background: var(--secondary);
-            color: white;
-            padding: 50px;
-            border-radius: 24px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .cta-banner h2 { color: white; margin-top: 0; }
+        h1 { font-size: 32px; font-weight: 800; margin-bottom: 20px; }
+        .pro-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         
-        .premium-btn {
-            background: var(--success);
-            color: white;
-            padding: 18px 45px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-block;
-            margin-top: 25px;
-            font-size: 18px;
-        }
+        /* Portfolio Simulator UI */
+        .sim-header { display: flex; justify-content: space-between; align-items: center; background: var(--text-main); color: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+        .sim-balance { font-size: 24px; font-weight: 800; }
+        .coin-row { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid var(--border); }
+        .buy-btn { background: var(--success); color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .buy-btn:hover { opacity: 0.9; }
+
+        /* Folklore UI */
+        .story-card { background: #fff9eb; border: 1px solid #fde68a; border-radius: 12px; padding: 20px; margin-bottom: 15px; }
+        .story-tag { background: #f59e0b; color: white; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+
+        /* Expandable Buttons */
+        .btn-expand { background: var(--primary); color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; margin-top: 10px; font-weight: 600; }
+        .hidden-info { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border); color: var(--text-muted); }
+
+        .cta-banner { background: #000; color: white; padding: 40px; border-radius: 20px; text-align: center; margin-top: 40px; }
+        .premium-btn { background: var(--primary); color: white; padding: 15px 35px; border-radius: 10px; text-decoration: none; font-weight: 700; display: inline-block; margin-top: 20px; }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="logo">
-        <img src="https://bitelity.net/Media/Image/logo.svg" alt="Bitelity">
-    </div>
-    
-    <div class="nav-group-label">Foundations</div>
+    <div class="logo"><img src="https://bitelity.net/Media/Image/logo.svg" alt="Bitelity"></div>
+    <div class="nav-group">Academy</div>
     <button class="nav-item active" onclick="showTab('intro')">Introduction</button>
+    <button class="nav-item" onclick="showTab('folklore')">Crypto Folklore</button>
+    <div class="nav-group">Advanced</div>
+    <button class="nav-item" onclick="showTab('simulator')">Live Simulator</button>
     <button class="nav-item" onclick="showTab('vocab')">Encyclopedia</button>
-    
-    <div class="nav-group-label">Advanced Trading</div>
-    <button class="nav-item" onclick="showTab('analysis')">Technical Analysis</button>
-    <button class="nav-item" onclick="showTab('psychology')">Market Psychology</button>
-    
-    <div class="nav-group-label">Execution</div>
-    <button class="nav-item" onclick="showTab('ai-trading')">AI & Automation</button>
-    <button class="nav-item" onclick="showTab('security')">Security Vault</button>
+    <div class="nav-group">Premium</div>
+    <button class="nav-item" onclick="showTab('pro')">AI Trading Pro</button>
 </nav>
 
 <main>
-    <!-- Section: Intro -->
+    <!-- Section: Introduction -->
     <section id="intro" class="section active">
-        <h1>The Evolution of Value</h1>
-        <p>In the digital age, scarcity is no longer physical—it is mathematical. This portal provides the intelligence required to master decentralized finance.</p>
-        
+        <h1>Mastering Digital Assets</h1>
         <div class="pro-card">
-            <h3>The Bitcoin Mechanism</h3>
-            <p>Bitcoin is the world's first "Hard Money" protocol. It exists outside the reach of central bank manipulation.</p>
-            <button class="btn-expand" onclick="toggleInfo(this)">Uncover Mechanics ↓</button>
+            <h3>How Bitcoin Works</h3>
+            <p>Bitcoin is a decentralized network that allows peer-to-peer value transfer without banks.</p>
+            <button class="btn-expand" onclick="toggleInfo(this)">Read Technical Details ↓</button>
             <div class="hidden-info">
-                <p><strong>Proof of Work (PoW):</strong> Miners use massive computational energy to secure the network. This energy creates a "Digital Wall" that protects your wealth. Unlike fiat currency, which can be printed at zero cost, every Bitcoin represents a verified expenditure of resources, making it the most secure asset in human history.</p>
+                <p>Bitcoin uses <strong>SHA-256 Cryptography</strong>. Every 10 minutes, miners compete to solve a puzzle. The winner adds a block of transactions to the ledger and is rewarded with new BTC. This process is called "Proof of Work," ensuring the network cannot be forged or manipulated.</p>
             </div>
         </div>
 
         <div class="pro-card">
-            <h3>Digital vs. Traditional</h3>
-            <p>Why the world is shifting from "Trust in Humans" to "Trust in Code."</p>
+            <h3>Digital vs Traditional Money</h3>
+            <p>Why "Hard Money" is replacing government-issued fiat.</p>
             <button class="btn-expand" onclick="toggleInfo(this)">Compare Systems ↓</button>
             <div class="hidden-info">
-                <p>Traditional banking relies on <strong>Centralized Intermediaries</strong>. When you send money, you are asking a bank for permission. In Crypto, transactions are <strong>Permissionless</strong>. You hold your own keys, you are your own bank, and the software ensures the rules are followed perfectly every time.</p>
+                <p>Fiat money (USD/EUR) has an infinite supply, leading to inflation. Bitcoin has a <strong>fixed supply of 21 million</strong>. Furthermore, traditional money is "permission-based"—banks can freeze your account. Crypto is "permissionless"—if you hold the keys, you have total control.</p>
             </div>
         </div>
     </section>
 
-    <!-- Section: Analysis -->
-    <section id="analysis" class="section">
-        <h1>Technical Analysis (TA)</h1>
-        <p>Professional traders don't guess—they read the footprint of money left on price charts.</p>
-        
-        <div class="pattern-box">
-            <h3>1. Support & Resistance</h3>
-            <p><strong>Support:</strong> The "Floor" where buyers consistently step in to stop a price drop.<br>
-               <strong>Resistance:</strong> The "Ceiling" where sellers consistently take profit and stop a price rise.</p>
+    <!-- Section: Folklore -->
+    <section id="folklore" class="section">
+        <h1>Crypto Folklore & Legends</h1>
+        <div class="story-card">
+            <span class="story-tag">THE PIZZA DAY</span>
+            <h3>The $700,000,000 Papa John's Order</h3>
+            <p>In 2010, Laszlo Hanyecz bought two pizzas for 10,000 BTC. It was the first time Bitcoin was used to buy a physical product. Today, those pizzas would be worth nearly a billion dollars.</p>
         </div>
-
-        <div class="pattern-box">
-            <h3>2. Candlestick Patterns</h3>
-            <p>Each candle tells a story of the battle between Bulls (Buyers) and Bears (Sellers) over a specific timeframe.</p>
+        <div class="story-card">
+            <span class="story-tag">THE WOW NERF</span>
+            <h3>How World of Warcraft Created Ethereum</h3>
+            <p>Vitalik Buterin created Ethereum after game developers nerfed his favorite character. He realized centralized power was dangerous and built a decentralized world computer.</p>
         </div>
-
-        <div class="pro-card" style="margin-top: 30px;">
-            <h3>The Power of Volume</h3>
-            <p>Price movement without volume is a trap. High volume confirms that a trend is real and backed by "Whales."</p>
+        <div class="story-card">
+            <span class="story-tag">SATOSHI</span>
+            <h3>The Ghost in the Machine</h3>
+            <p>The creator of Bitcoin, Satoshi Nakamoto, vanished in 2011. He left behind 1.1 million BTC (worth $70B+) that has never been touched, ensuring Bitcoin remains a leaderless movement.</p>
         </div>
     </section>
 
-    <!-- Section: Psychology -->
-    <section id="psychology" class="section">
-        <h1>Market Psychology</h1>
-        <p>The market is driven by two emotions: <strong>Fear</strong> and <strong>Greed</strong>.</p>
+    <!-- Section: Simulator -->
+    <section id="simulator" class="section">
+        <h1>Portfolio Simulator</h1>
+        <p>Test your trading skills with $10,000 in virtual cash.</p>
         
-        <div class="psych-meter"></div>
-        <div style="display: flex; justify-content: space-between; color: var(--text-muted); font-size: 12px;">
-            <span>EXTREME FEAR (Buying Opportunity)</span>
-            <span>NEUTRAL</span>
-            <span>EXTREME GREED (Selling Opportunity)</span>
+        <div class="sim-header">
+            <div>
+                <small>AVAILABLE BALANCE</small>
+                <div class="sim-balance" id="balance">$10,000.00</div>
+            </div>
+            <div style="text-align: right;">
+                <small>PORTFOLIO VALUE</small>
+                <div class="sim-balance" id="port-value">$0.00</div>
+            </div>
         </div>
 
-        <div class="pro-card" style="margin-top: 40px;">
-            <h3>The Market Cycle</h3>
-            <ol>
-                <li><strong>Accumulation:</strong> Smart money buys while everyone is afraid.</li>
-                <li><strong>Expansion:</strong> Prices rise, the public notices.</li>
-                <li><strong>Distribution:</strong> Professionals sell to the "Late Comers" (FOMO).</li>
-                <li><strong>Correction:</strong> Prices crash, fear returns.</li>
-            </ol>
-        </div>
-    </section>
-
-    <!-- Section: Vocab -->
-    <section id="vocab" class="section">
-        <h1>Intelligence Encyclopedia</h1>
-        <div class="vocab-grid" id="vocabGrid"></div>
-    </section>
-
-    <!-- Section: AI Trading -->
-    <section id="ai-trading" class="section">
-        <h1>AI & Automated Execution</h1>
-        <p>In 2025, over 80% of crypto volume is executed by algorithms. Human emotion is the biggest liability in trading.</p>
-        
         <div class="pro-card">
-            <h3>How AI Trading Works</h3>
-            <ul>
-                <li><strong>Arbitrage:</strong> Buying low on one exchange and selling high on another in milliseconds.</li>
-                <li><strong>Sentiment Analysis:</strong> AI scans Twitter and News to predict price moves before they happen.</li>
-                <li><strong>High-Frequency Trading (HFT):</strong> Executing thousands of trades per second to capture tiny price gaps.</li>
-            </ul>
+            <div class="coin-row">
+                <span><strong>Bitcoin (BTC)</strong> <br><small>$65,000</small></span>
+                <button class="buy-btn" onclick="buyCoin('BTC', 65000)">BUY 0.1 BTC</button>
+            </div>
+            <div class="coin-row">
+                <span><strong>Ethereum (ETH)</strong> <br><small>$3,500</small></span>
+                <button class="buy-btn" onclick="buyCoin('ETH', 3500) ">BUY 1.0 ETH</button>
+            </div>
+            <div class="coin-row">
+                <span><strong>Solana (SOL)</strong> <br><small>$150</small></span>
+                <button class="buy-btn" onclick="buyCoin('SOL', 150)">BUY 10 SOL</button>
+            </div>
         </div>
+        <button class="btn-expand" style="background: var(--danger);" onclick="resetSim()">Reset Portfolio</button>
+    </section>
 
+    <!-- Section: Pro -->
+    <section id="pro" class="section">
+        <h1>AI Trading Professional</h1>
+        <div class="pro-card">
+            <h3>Institutional Grade Execution</h3>
+            <p>Our algorithms scan 50+ exchanges simultaneously to execute Arbitrage and Trend-Following strategies with 99.9% uptime.</p>
+        </div>
         <div class="cta-banner">
-            <h2>Unlock Your Financial Future</h2>
-            <p>Access our Proprietary AI-Trading Algorithms and Private Mastermind Group.</p>
-            <a href="#" class="premium-btn">GET PREMIUM ACCESS NOW</a>
+            <h2>Ready to Monetize?</h2>
+            <p>Get the full source code, trading bots, and premium signals.</p>
+            <a href="#" class="premium-btn">UPGRADE TO PRO ACCESS</a>
         </div>
     </section>
 </main>
 
 <script>
-    const terms = [
-        { t: "Blockchain", d: "A decentralized, immutable digital ledger." },
-        { t: "Whale", d: "An entity with enough capital to move market prices." },
-        { t: "HODL", d: "Strategic long-term holding of assets." },
-        { t: "Gas Fee", d: "Cost paid to the network for processing a transaction." },
-        { t: "Smart Contract", d: "Self-executing code on the blockchain." },
-        { t: "DeFi", d: "Financial services without traditional banks." },
-        { t: "Stablecoin", d: "Crypto pegged 1:1 to assets like the US Dollar." },
-        { t: "Cold Wallet", d: "Offline storage for maximum security." },
-        { t: "Fiat", d: "Government-issued currency (USD, EUR)." },
-        { t: "Leverage", d: "Using borrowed funds to increase trade size." },
-        { t: "ROI", d: "Return on Investment percentage." },
-        { t: "Mining", d: "The process of securing PoW networks." }
-    ];
+    // Simulator Logic
+    let cash = 10000;
+    let portfolioValue = 0;
 
-    const grid = document.getElementById('vocabGrid');
-    terms.forEach(item => {
-        grid.innerHTML += `<div class="vocab-tag"><strong>${item.t}</strong>${item.d}</div>`;
-    });
+    function buyCoin(name, price) {
+        if (cash >= price * 0.1) {
+            let cost = (name === 'BTC') ? 6500 : (name === 'ETH' ? 3500 : 1500);
+            if (cash >= cost) {
+                cash -= cost;
+                portfolioValue += cost;
+                updateUI();
+                alert(`Successfully bought ${name}!`);
+            }
+        } else {
+            alert("Insufficient funds!");
+        }
+    }
 
+    function resetSim() {
+        cash = 10000;
+        portfolioValue = 0;
+        updateUI();
+    }
+
+    function updateUI() {
+        document.getElementById('balance').innerText = `$${cash.toLocaleString()}`;
+        document.getElementById('port-value').innerText = `$${portfolioValue.toLocaleString()}`;
+    }
+
+    // Navigation
     function showTab(id) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         event.currentTarget.classList.add('active');
-        document.querySelector('main').scrollTop = 0;
     }
 
+    // Expand Logic
     function toggleInfo(btn) {
         const info = btn.nextElementSibling;
         if (info.style.display === "block") {
